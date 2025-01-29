@@ -1,14 +1,6 @@
 # Brighte Eats Frontend
 
-## Routes
-
-`http://localhost:4000` - Home Page
-
-![Home Page](images/home_page.png)
-
-`http://localhost:4000/lead` - List of Service Type Page
-
-![Service Types](images/listPage.png)
+NextJS web application that handles user registration with a preferred service type, retrieves the leading service type, and provides a list of service types along with the total number of interests.
 
 ## Setup Procedure
 
@@ -30,7 +22,7 @@ cp .env.example .env
 
 Make sure you have your Docker tools such as Docker Desktop, Rancher, etc. installed on your machine.
 
-1. Dockerfile && docker-compose.yaml are already provided in this repository.
+1. Dockerfile & docker-compose.yaml are already provided in this repository.
 2. In terminal, run
 
 ```bash
@@ -48,3 +40,13 @@ brighte-eats-1  |
 brighte-eats-1  |  ✓ Starting...
 brighte-eats-1  |  ✓ Ready in 338ms
 ```
+
+## Pages
+
+`http://localhost:4000` - Home Page
+
+![Home Page](images/home_page.png)
+
+`http://localhost:4000/lead` - List of Service Type Page
+
+![Service Types](images/listPage.png)
