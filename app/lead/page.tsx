@@ -25,14 +25,14 @@ export default function App() {
   });
 
   return (
-    <section className="flex flex-col light items-center justify-center">
+    <section className="flex flex-col items-center justify-center">
       <div className="items-center text-center justify-center w-full">
         <div className="my-4">
           <span className={title({ color: "pink" })}>Brighte&nbsp;</span>
           <span className={title({ color: "green" })}>Eats&nbsp;</span>
         </div>
         <div className="my-4">
-          <Table aria-label="Leading Table" className="dark">
+          <Table aria-label="Leading Table">
             <TableHeader>
               <TableColumn>Service Type</TableColumn>
               <TableColumn>Total of interests</TableColumn>

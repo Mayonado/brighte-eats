@@ -49,4 +49,4 @@ brighte-eats-1  |  ✓ Ready in 338ms
 
 `http://localhost:4000/lead` - List of Service Type Page
 
-![Service Types](images/listPage.png)
+![Service Types](images/ViewPage.png)

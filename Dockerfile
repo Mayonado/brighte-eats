@@ -4,7 +4,7 @@ WORKDIR /app
 
 ## Build Image
 FROM node_image as build_image
-COPY .npmrc package*.json ./
+COPY package*.json ./
 
 RUN npm install
 
