@@ -1,16 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import request from "graphql-request";
+import request, { ClientError } from "graphql-request";
 import { Form, Input, Button, RadioGroup, Radio } from "@heroui/react";
 import { title } from "@/components/primitives";
 import { useMutation } from "@tanstack/react-query";
 import { User, UserMutationDocument } from "../graphql/user";
-import { redirect } from "next/navigation";
-import { SERVICE_TYPE } from "./types/types";
+import { useRouter } from "next/navigation";
+import { Error, SERVICE_TYPE } from "./types/types";
 import { API_URL } from "@/constants";
+import { Alert } from "@heroui/react";
 
 export default function App() {
+  const router = useRouter();
   // set default values
   const [user, setUser] = useState<User>({
     name: "",
@@ -18,6 +20,11 @@ export default function App() {
     mobile: "",
     postcode: "",
     service_type: SERVICE_TYPE.DELIVERY,
+  });
+  const [error, setError] = useState<Error>({
+    isError: false,
+    message: "",
+    title: "",
   });
 
   const { mutate: register } = useMutation({
@@ -36,12 +43,49 @@ export default function App() {
 
   const onSubmit = (formEvt: React.FormEvent<HTMLFormElement>) => {
     formEvt.preventDefault();
-    register(user);
-    redirect("/lead");
+    register(user, {
+      onSettled(data, error) {
+        const err = error as unknown as ClientError;
+
+        if (data) {
+          router.push("/lead");
+        }
+
+        if (
+          err &&
+          err.response &&
+          err.response.errors &&
+          err.response.errors.length
+        ) {
+          for (const clientErr of err.response.errors) {
+            setError({
+              isError: true,
+              message: clientErr.message,
+              title: "Registration error",
+            });
+          }
+        }
+      },
+    });
+  };
+
+  const closeError = () => {
+    setError({
+      ...error,
+      isError: false,
+    });
   };
 
   return (
-    <section className="flex flex-col items-center justify-center">
+    <section className="flex flex-col">
+      <Alert
+        color="danger"
+        description={error.message}
+        isVisible={error.isError}
+        title={error.title}
+        variant="faded"
+        onClose={closeError}
+      />
       <div className="items-center text-center justify-center w-full">
         <div className="my-4">
           <span className={title({ color: "pink" })}>Brighte&nbsp;</span>

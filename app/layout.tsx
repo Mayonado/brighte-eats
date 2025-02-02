@@ -19,7 +19,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class" }}>
+        <Providers>
           <div className="relative flex flex-col h-screen">
             <main className="container mx-auto max-w-3xl pt-16 px-6 flex-grow">
               {children}
